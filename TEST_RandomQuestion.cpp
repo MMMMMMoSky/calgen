@@ -1,6 +1,6 @@
 /**
  * g++ TEST_RandomQuestion.cpp RandomQuestion.cpp Number.cpp Random.cpp -o tmp
- * 不要修改! 使用TEST_ASSERT_RandomQuestion.py来测试
+ * 不要修改输出格式! 使用TEST_ASSERT_RandomQuestion.py来测试
  */
 #include "RandomQuestion.h"
 #include <fstream>

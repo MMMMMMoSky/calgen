@@ -54,7 +54,7 @@ std::string RandomQuestion::binaryRandom(int opNum, Number &ans, int &op)
     {
         lhsStr = "(" + lhsStr + ")";
     }
-    // 只要右子节点不为数字, 而且右子节点优先级不大于当前节点, 右子树就需要加括号
+    // 当op优先级不小于右子节点优先级时, 右子树需要加括号
     if (op / 2 >= rhsOp / 2)
     {
         rhsStr = "(" + rhsStr + ")";
