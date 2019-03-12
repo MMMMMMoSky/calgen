@@ -17,7 +17,7 @@ class RandomQuestion
     // opNum为剩余运算符数量, ans为运算结果, op是为了返回当前节点的运算符 (当左子节点运算符优先级小于当前时, 需要加括号)
     std::string binaryRandom(int opNum, Number &ans, int &op);
 
-    // 标识运算符
+    // 标识运算符, 可以直接用这个值除以2来表示运算符的优先级
     enum OPERATOR
     {
         PLUS = 0,
