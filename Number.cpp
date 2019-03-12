@@ -28,7 +28,8 @@ void Number::regularize(Number &n)
     if (n.denominator < 0)
     {
         n.denominator = -n.denominator;
-        n.numerator = -n.denominator;
+        // n.numerator = -n.denominator; // Number类没有充分单元测试!!! 进行RandomQuestion单元测试的时候才发现这个错误
+        n.numerator = -n.numerator;
     }
 
     int gcd = Number::gcd(abs(n.numerator), n.denominator);
