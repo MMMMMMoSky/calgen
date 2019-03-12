@@ -19,65 +19,51 @@ RandomQuestion::RandomQuestion(int opNum, int range)
         opNum = 4;
     }
 
-    question = binaryRandom(opNum, answer, -1);
+    int tmp;
+    question = binaryRandom(opNum, answer, tmp);
 }
 
-std::string RandomQuestion::binaryRandom(int opNum, Number &res, int faLevel)
+std::string RandomQuestion::binaryRandom(int opNum, Number &ans, int &op)
 {
-    Number lhs, rhs;
-    std::string str;
-    int op = Random::randint(0, 3);
-    int thisLevel = op >> 1;
-
-    if (opNum == 1)
+    if (opNum == 0)
     {
-        lhs = Random::randint(2, 20);   // TODO: 可以设定难度
-        rhs = Random::randint(2, 20);
-        str = lhs.toString() + RandomQuestion::operators[op] + rhs.toString();
+        ans = Random::randint(2, 20); // TODO: 添加难度设定 有不同的数字范围
+        op = NUMBER;
+        return ans.toString();
     }
-    else
+
+    Number lhsAns, rhsAns;
+    std::string lhsStr, rhsStr;              // 左右子树对应的表达式 (这种写法牺牲了一点效率, 换来易读性)
+    op = Random::randint(0, 3);              // 随机选择运算符 TODO: 添加难度设定 选定运算符
+    int lhsOp, rhsOp;                        // 左右子树的运算符
+    int lft = Random::randint(0, opNum - 1); // 随机生成左子树运算符数量
+    lhsStr = binaryRandom(lft, lhsAns, lhsOp);
+    rhsStr = binaryRandom(opNum - lft - 1, rhsAns, rhsOp);
+
+    // 给左右子树加括号
+    if (op == MULTIPLY || op == DIVISION) // 该节点是乘除时, 右子节点不为数字则要加括号, 左子节点为加减也要加括号
     {
-        // 当该节点与其右子节点都是乘/除的时候, 需要把右子节点加括号
-        // 因为乘除混合运算不支持结合律
-        int left = Random::randint(1, opNum - 1);
-        str = binaryRandom(left, lhs, thisLevel) + RandomQuestion::operators[op];
-        std::string rightStr = binaryRandom(opNum - left, rhs, thisLevel);
-        // 如果右子节点是加减, 那么就已经有括号了   TODO: 这里的写法可以优化
-        if (thisLevel == 1 && rightStr[0] != '(')
+        if (lhsOp == PLUS || lhsOp == MINUS)
         {
-            str += "(" + rightStr + ")";
+            lhsStr = "(" + lhsStr + ")";
         }
-        else
+        if (rhsOp != NUMBER)
         {
-            str += rightStr;
+            rhsStr = "(" + rhsStr + ")";
         }
     }
 
     switch (op)
     {
-        case PLUS:
-            res = lhs + rhs;
-            break;
-        case MINUS:
-            res = lhs - rhs;
-            break;
-        case MULTIPLY:
-            res = lhs * rhs;
-            break;
-        case DIVISION:
-            res = lhs / rhs;
-            break;
-        default:
-            break;
+        case PLUS:      ans = lhsAns + rhsAns; break;
+        case MINUS:     ans = lhsAns - rhsAns; break;
+        case MULTIPLY:  ans = lhsAns * rhsAns; break;
+        case DIVISION:  ans = lhsAns / rhsAns; break;
+        default: break;
     }
 
-    // 当表达式二叉树的父节点的运算符优先级比该节点高时, 该节点的表达式需要加括号
-    if (thisLevel < faLevel)
-    {
-        str = "(" + str + ")";
-    }
-
-    return str;
+    return lhsStr + operators[op] + rhsStr;
 }
 
-std::string RandomQuestion::operators[4] = {"+", "-", "×", "÷"};
+// std::string RandomQuestion::operators[4] = {"+", "-", "×", "÷"};
+std::string RandomQuestion::operators[4] = {"+", "-", "*", "/"};    // 纯ASCII字符, 方便用py验证结果
