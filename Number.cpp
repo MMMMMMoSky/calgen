@@ -205,12 +205,14 @@ const Number &Number::operator=(const Number &rhs)
 {
     numerator = rhs.numerator;
     denominator = rhs.denominator;
+    return *this;
 }
 
 const Number &Number::operator=(int rhs)
 {
     numerator = rhs;
     denominator = 1;
+    return *this;
 }
 
 bool operator<(int lhs, const Number &rhs)
