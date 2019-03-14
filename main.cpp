@@ -20,7 +20,7 @@ int extractPara(int argc, char **argv) //解析命令行
 {
     string standard = "-n";
 
-    if (argc <= 2)
+    if (argc == 1)
     {
         return 5;
     }
@@ -28,12 +28,21 @@ int extractPara(int argc, char **argv) //解析命令行
     {
         printSpeci();
     }
-    if (argc == 3 && stoi(argv[2]) > 0 && stoi(argv[2]) <= 20)
+    try
     {
-        return stoi(argv[2]);
+        if (argc == 3 && stoi(argv[2]) > 0 && stoi(argv[2]) <= 20)
+        {
+            return stoi(argv[2]);
+        }
     }
-
-    printSpeci();
+    catch(const std::invalid_argument& e1)
+    {
+        printSpeci();
+    }
+    catch(const std::out_of_range& e2)
+    {
+        printSpeci();
+    }
 }
 
 int main(int argc, char **argv)
