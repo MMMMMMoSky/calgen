@@ -33,10 +33,10 @@ class Number
     int getDenominator() const;
 
     /* 重载算术运算符 */
-    const Number &operator+(const Number &rhs) const;
-    const Number &operator-(const Number &rhs) const;
-    const Number &operator*(const Number &rhs) const;
-    const Number &operator/(const Number &rhs) const;
+    const Number operator+(const Number &rhs) const;
+    const Number operator-(const Number &rhs) const;
+    const Number operator*(const Number &rhs) const;
+    const Number operator/(const Number &rhs) const;
 
     /* 重载负号 */
     Number operator-(void) const;

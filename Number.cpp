@@ -84,7 +84,7 @@ const Number &Number::operator+=(const Number &rhs)
     return *this;
 }
 
-const Number &Number::operator+(const Number &rhs) const
+const Number Number::operator+(const Number &rhs) const
 {
     Number ret = *this;
     return ret += rhs;
@@ -100,7 +100,7 @@ const Number &Number::operator-=(const Number &rhs)
     return *this;
 }
 
-const Number &Number::operator-(const Number &rhs) const
+const Number Number::operator-(const Number &rhs) const
 {
     Number ret = *this;
     return ret -= rhs;
@@ -114,7 +114,7 @@ const Number &Number::operator*=(const Number &rhs)
     return *this;
 }
 
-const Number &Number::operator*(const Number &rhs) const
+const Number Number::operator*(const Number &rhs) const
 {
     Number ret = *this;
     return ret *= rhs;
@@ -128,7 +128,7 @@ const Number &Number::operator/=(const Number &rhs)
     return *this;
 }
 
-const Number &Number::operator/(const Number &rhs) const
+const Number Number::operator/(const Number &rhs) const
 {
     Number ret = *this;
     return ret /= rhs;
