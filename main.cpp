@@ -18,31 +18,37 @@ void printSpeci() //打印标准
 
 int extractPara(int argc, char **argv) //解析命令行
 {
-    string standard = "-n";
-
     if (argc == 1)
     {
         return 5;
     }
-    if (argv[1] != standard)
+
+    if (string(argv[1]) != "-n")
     {
         printSpeci();
     }
-    try
+
+    for (int i = 0; argv[2][i]; i++)
     {
-        if (argc == 3 && stoi(argv[2]) > 0 && stoi(argv[2]) <= 20)
+        if (!isdigit(argv[2][i]))
         {
-            return stoi(argv[2]);
+            printSpeci();
         }
     }
-    catch(const std::invalid_argument& e1)
+
+    try
     {
-        printSpeci();
+        int n = stoi(argv[2]);
+        if (argc == 3 && n > 0 && n <= 20)
+        {
+            return n;
+        }
     }
-    catch(const std::out_of_range& e2)
+    catch (const std::out_of_range &e)
     {
-        printSpeci();
     }
+
+    printSpeci();
 }
 
 int main(int argc, char **argv)
