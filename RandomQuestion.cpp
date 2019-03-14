@@ -72,5 +72,5 @@ std::string RandomQuestion::binaryRandom(int opNum, Number &ans, int &op)
     return lhsStr + operators[op] + rhsStr;
 }
 
-std::string RandomQuestion::operators[4] = {"+", "-", "×", "÷"};
-// std::string RandomQuestion::operators[4] = {"+", "-", "*", "/"};    // 纯ASCII字符, 方便用py验证结果
+// std::string RandomQuestion::operators[4] = {"+", "-", "×", "÷"};
+std::string RandomQuestion::operators[4] = {"+", "-", "*", "/"};    // 纯ASCII字符, 方便用py验证结果
