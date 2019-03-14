@@ -63,7 +63,7 @@ int main(int argc, char **argv)
 
     for (int i = 0; i < num; i++)
     {
-        questions.push_back(RandomQuestion());
+        questions.push_back(RandomQuestion(3, 1)); // 可以在这里更改默认难度 TODO: 添加一个命令行参数可选难度
     }
 
     for (int n = 0; n < num; n++)
